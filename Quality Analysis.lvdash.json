@@ -1,0 +1,272 @@
+{
+  "datasets": [
+    {
+      "name": "aa8667dd",
+      "displayName": "data_quality_report_bronze",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.sales_project_db.data_quality_report_bronze",
+        "dimensions": [
+          {
+            "name": "check",
+            "expr": "source.check",
+            "displayName": "Check"
+          },
+          {
+            "name": "value",
+            "expr": "source.value",
+            "displayName": "Value"
+          },
+          {
+            "name": "status",
+            "expr": "source.status",
+            "displayName": "Status"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "9da4892b",
+      "displayName": "data_quality_report_silver",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.sales_project_db.data_quality_report_silver",
+        "dimensions": [
+          {
+            "name": "check",
+            "expr": "source.check",
+            "displayName": "Check"
+          },
+          {
+            "name": "value",
+            "expr": "source.value",
+            "displayName": "Value"
+          },
+          {
+            "name": "status",
+            "expr": "source.status",
+            "displayName": "Status"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "37d62f55",
+      "displayName": "Bronze vs Silver layer Data",
+      "layout": [
+        {
+          "widget": {
+            "name": "ca01ced9",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "aa8667dd",
+                  "fields": [
+                    {
+                      "name": "check",
+                      "expression": "`check`"
+                    },
+                    {
+                      "name": "value",
+                      "expression": "`value`"
+                    },
+                    {
+                      "name": "status",
+                      "expression": "`status`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "check"
+                  },
+                  {
+                    "fieldName": "value",
+                    "displayName": "Value"
+                  },
+                  {
+                    "fieldName": "status",
+                    "contentAlignment": "center",
+                    "style": {
+                      "type": "basic",
+                      "rules": [
+                        {
+                          "condition": {
+                            "operand": {
+                              "type": "data-value",
+                              "value": "PASS"
+                            },
+                            "operator": "="
+                          },
+                          "backgroundColor": "#00A972"
+                        },
+                        {
+                          "condition": {
+                            "operand": {
+                              "type": "data-value",
+                              "value": "FAIL"
+                            },
+                            "operator": "="
+                          },
+                          "backgroundColor": {
+                            "themeColorType": "visualizationColors",
+                            "position": 4
+                          }
+                        },
+                        {
+                          "condition": {
+                            "operand": {
+                              "type": "data-value",
+                              "value": "INFO"
+                            },
+                            "operator": "="
+                          },
+                          "backgroundColor": {
+                            "themeColorType": "visualizationColors",
+                            "position": 5
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 7,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "922d50ec",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9da4892b",
+                  "fields": [
+                    {
+                      "name": "check",
+                      "expression": "`check`"
+                    },
+                    {
+                      "name": "value",
+                      "expression": "`value`"
+                    },
+                    {
+                      "name": "status",
+                      "expression": "`status`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "check"
+                  },
+                  {
+                    "fieldName": "value"
+                  },
+                  {
+                    "fieldName": "status",
+                    "style": {
+                      "type": "basic",
+                      "rules": [
+                        {
+                          "condition": {
+                            "operand": {
+                              "type": "data-value",
+                              "value": "INFO"
+                            },
+                            "operator": "="
+                          },
+                          "backgroundColor": {
+                            "themeColorType": "visualizationColors",
+                            "position": 5
+                          }
+                        },
+                        {
+                          "condition": {
+                            "operand": {
+                              "type": "data-value",
+                              "value": "PASS"
+                            },
+                            "operator": "="
+                          },
+                          "backgroundColor": "#00A972"
+                        },
+                        {
+                          "condition": {
+                            "operand": {
+                              "type": "data-value",
+                              "value": "FAIL"
+                            },
+                            "operator": "="
+                          },
+                          "backgroundColor": {
+                            "themeColorType": "visualizationColors",
+                            "position": 4
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 7,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
