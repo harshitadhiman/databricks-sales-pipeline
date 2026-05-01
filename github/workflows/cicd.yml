@@ -25,8 +25,8 @@ jobs:
 
       - name: Deploy Notebooks
         run: |
-          databricks workspace import_dir notebooks /Workspace/sales_project --overwrite
+          databricks workspace import_dir Notebooks /Workspace/Sales Data Project --overwrite
 
       - name: Deploy Job
         run: |
-          databricks jobs create --json-file jobs/job.json
+          databricks jobs create --json-file job/jobs.json
