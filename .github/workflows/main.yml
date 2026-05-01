@@ -25,7 +25,7 @@ jobs:
 
       - name: Deploy Notebooks
         run: |
-          databricks workspace import_dir Notebooks /Workspace/Sales Data Project --overwrite
+          databricks workspace import_dir Notebooks /Workspace/Sales_Data_Project --overwrite
 
       - name: Deploy Job
         run: |
