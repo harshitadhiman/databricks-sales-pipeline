@@ -23,7 +23,7 @@
     },
     {
       "task_key": "tables",
-      "depends_on": [{"task_key": "silver"}]
+      "depends_on": [{"task_key": "silver"}],
       "notebook_task":{
         "notebook_path": "/Workspace/Sales_Data_Project/Tables - fact & dimension"
     }
