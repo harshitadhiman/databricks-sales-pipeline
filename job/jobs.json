@@ -1,6 +1,8 @@
 {
-  "name": "Sales ETL Pipeline",
-  "tasks": [
+  "job_id": 1028165838783074,
+  "new_settings": {
+    "name": "Sales ETL Pipeline",
+    "tasks": [
     {
       "task_key": "bronze",
       "notebook_task": {
