@@ -1,74 +1,115 @@
-**Sales Data Pipeline — Databricks + CI/CD
-**
-An end-to-end data engineering pipeline implementing the medallion architecture (Bronze → Silver → Gold) in Databricks, with automated deployment via GitHub Actions.
 
-Architecture
+---
 
-``
-Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold Layer → Analytics
-`
+# 📊 Sales Data Pipeline — Databricks + CI/CD
 
-Tech Stack: Databricks (PySpark, Delta Lake) · GitHub Actions · Python · SQL
+An end-to-end data engineering pipeline implementing the **Medallion Architecture (Bronze → Silver → Gold)** using Databricks. The project includes automated deployment and orchestration through GitHub Actions for a fully CI/CD-enabled workflow.
 
-Project Structure
+---
 
-`
+## 🚀 Overview
+
+This project demonstrates how to design and build a scalable data pipeline that:
+
+* Ingests raw data into Delta Lake
+* Transforms and cleans data for analytics
+* Applies data quality checks
+* Produces business-ready aggregated datasets
+* Automates deployment using CI/CD
+
+---
+
+## 🏗️ Architecture
+
+```
+Source Data → Bronze → Silver → Data Quality → Gold → Analytics
+```
+
+---
+
+## 🛠️ Tech Stack
+
+* **Databricks** (PySpark, Delta Lake)
+* **Python**
+* **SQL**
+* **GitHub Actions** (CI/CD)
+
+---
+
+## 📁 Project Structure
+
+```
 databricks-sales-pipeline/
 ├── Notebooks/
-│   ├── Ingest Data - Bronze layer.ipynb
-│   ├── Transformation and cleaning - Silver Layer.ipynb
+│   ├── Ingest Data - Bronze Layer.ipynb
+│   ├── Transformation & Cleaning - Silver Layer.ipynb
 │   ├── Data Quality Checks.ipynb
-│   ├── Tables - fact & dimension.ipynb
-│   └── Aggregate Tables - Gold Layer.ipynb
+│   ├── Fact & Dimension Tables.ipynb
+│   └── Aggregations - Gold Layer.ipynb
 ├── job/
 │   └── jobs.json
 ├── .github/workflows/
 │   └── main.yml
 └── README.md
-`
+```
 
-Pipeline Layers
-Bronze (Ingestion)
-Raw data ingested into Delta tables with minimal transformation.
+---
 
-Silver (Transformation)
-• Null handling and type casting
-• Feature engineering (deliverydays, deliverytype)
-• Data standardization
+## 🔄 Pipeline Layers
 
-Data Quality
-• Null and duplicate checks
-• Validation rules with pass/fail reporting
+### 🟫 Bronze (Ingestion)
 
-Gold (Analytics)
-Aggregated tables for business metrics:
-• Sales trends and regional analysis
-• Customer behavior segmentation
-• Delivery performance tracking
+* Raw data ingestion into Delta tables
+* Minimal transformations to preserve source data
 
-Data Model
+### ⚪ Silver (Transformation)
 
-| Fact Table | Dimension Tables |
-|------------|------------------|
-| Sales metrics (Sales, Quantity, Profit) | Customer, Product, Geography, Date |
+* Null handling and type casting
+* Data cleaning and standardization
+* Feature engineering (`delivery_days`, `delivery_type`)
 
-CI/CD Pipeline
+### ✅ Data Quality
 
-Triggered on every push to main:
+* Null and duplicate checks
+* Business rule validation with pass/fail reporting
 
-Checkout repository
-Install and authenticate Databricks CLI
-Deploy notebooks to workspace
-Update job configuration
-Trigger pipeline run
+### 🟨 Gold (Analytics)
 
-Required Secrets: DATABRICKSHOST, DATABRICKSTOKEN`
+* Aggregated datasets for reporting and insights:
 
-Roadmap
-• Incremental loading with MERGE
-• Partition optimization
-• Logging and monitoring layer
-• BI tool integration (Power BI / Tableau)
+  * Sales trends
+  * Regional performance
+  * Customer segmentation
+  * Delivery efficiency
 
-Author
-Harshita Dhiman — Data Engineering Enthusiast
+---
+
+## 📊 Data Model
+
+| Fact Table                      | Dimension Tables                   |
+| ------------------------------- | ---------------------------------- |
+| Sales (Sales, Quantity, Profit) | Customer, Product, Geography, Date |
+
+---
+
+## ⚙️ CI/CD Pipeline
+
+Automated using GitHub Actions and triggered on every push to `main`.
+
+### Workflow Steps:
+
+1. Checkout repository
+2. Install and authenticate Databricks CLI
+3. Deploy notebooks to Databricks workspace
+4. Update job configuration
+5. Trigger pipeline run
+
+### 🔐 Required Secrets
+
+* `DATABRICKS_HOST`
+* `DATABRICKS_TOKEN`
+
+---
+
+
+
