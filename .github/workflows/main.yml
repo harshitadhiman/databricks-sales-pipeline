@@ -33,6 +33,11 @@ jobs:
         run: |
           databricks workspace import-dir Notebooks /Workspace/Sales_Data_Project --overwrite
 
-      - name: Deploy Job
+
+      - name: Update Job
         run: |
-          databricks jobs create --json-file job/jobs.json
+          databricks jobs reset --job-id Sales_ETL_Pipeline --json @job/jobs.json
+      
+      - name: Run Job
+        run: |
+          databricks jobs run-now --job-id Sales_ETL_Pipeline
