@@ -13,20 +13,25 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Install Databricks CLI (new)
+      - name: Install Databricks CLI
         run: |
           curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
 
       - name: Configure Databricks
         run: |
-          databricks configure --token <<EOF
-          ${{ secrets.DATABRICKS_HOST }}
-          ${{ secrets.DATABRICKS_TOKEN }}
-          EOF
+          mkdir -p ~/.databricks
+          echo "[DEFAULT]
+          host = ${{ secrets.DATABRICKS_HOST }}
+          token = ${{ secrets.DATABRICKS_TOKEN }}" > ~/.databrickscfg
+
+      - name: Debug Repo Structure
+        run: |
+          echo "Listing repo files:"
+          ls -R
 
       - name: Deploy Notebooks
         run: |
-          databricks workspace import_dir Notebooks /Workspace/Sales_Data_Project --overwrite 
+          databricks workspace import-dir Notebooks /Workspace/Sales_Data_Project --overwrite
 
       - name: Deploy Job
         run: |
