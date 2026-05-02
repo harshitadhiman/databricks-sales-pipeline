@@ -38,6 +38,4 @@ jobs:
         run: |
           databricks jobs reset --json @job/jobs.json
       
-      - name: Run Job
-        run: |
-          databricks jobs run-now --job-id 1028165838783074
+
