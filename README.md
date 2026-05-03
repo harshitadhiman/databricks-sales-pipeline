@@ -153,7 +153,7 @@ Validation checks run on both Bronze and Silver layers before downstream process
 
 ---
 
-## 📊 Data Model
+## Data Model
 
 ### Fact Table
 
