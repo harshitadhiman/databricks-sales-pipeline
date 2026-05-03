@@ -7,6 +7,22 @@ An **end-to-end data engineering pipeline** using Databricks, following the **Me
 The pipeline ingests raw retail sales data, applies transformations and quality checks, and produces analytics-ready datasets—all orchestrated through Databricks Jobs and deployed automatically on every push to main.
 
 
+### Key Highlights
+
+- End-to-end ETL pipeline using Databricks
+- Implemented Medallion Architecture (Bronze, Silver, Gold)
+- Built data quality framework with validation reporting
+- Automated deployment using CI/CD (GitHub Actions)
+- Designed scalable and modular pipeline
+
+## Technology Stack
+
+* Databricks (PySpark, Delta Lake)
+* Python
+* SQL
+* GitHub (Version Control)
+* GitHub Actions (CI/CD)
+* Data Engineering Concepts (ETL, Data Modeling)
 
 ## Project Structure
 ```
@@ -28,22 +44,7 @@ databricks-sales-pipeline/
 └── README.md
 ```
 
-### Key Highlights
 
-- End-to-end ETL pipeline using Databricks
-- Implemented Medallion Architecture (Bronze, Silver, Gold)
-- Built data quality framework with validation reporting
-- Automated deployment using CI/CD (GitHub Actions)
-- Designed scalable and modular pipeline
-
-## Technology Stack
-
-* Databricks (PySpark, Delta Lake)
-* Python
-* SQL
-* GitHub (Version Control)
-* GitHub Actions (CI/CD)
-* Data Engineering Concepts (ETL, Data Modeling)
 
 ## Architecture
 ```text
