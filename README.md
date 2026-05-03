@@ -3,9 +3,8 @@
 
 
 ## Project Overview
-This project implements an **end-to-end data engineering pipeline** using Databricks, following the **Medallion Architecture (Bronze → Silver → Gold)**.
-
-This pipeline ingests raw retail sales data, applies transformations and quality checks, and produces analytics-ready datasets—all orchestrated through Databricks Jobs and deployed automatically on every push to main.
+An **end-to-end data engineering pipeline** using Databricks, following the **Medallion Architecture**.
+The pipeline ingests raw retail sales data, applies transformations and quality checks, and produces analytics-ready datasets—all orchestrated through Databricks Jobs and deployed automatically on every push to main.
 
 
 
@@ -29,7 +28,40 @@ databricks-sales-pipeline/
 └── README.md
 ```
 
+### Key Highlights
 
+- End-to-end ETL pipeline using Databricks
+- Implemented Medallion Architecture (Bronze, Silver, Gold)
+- Built data quality framework with validation reporting
+- Automated deployment using CI/CD (GitHub Actions)
+- Designed scalable and modular pipeline
+
+## Technology Stack
+
+* Databricks (PySpark, Delta Lake)
+* Python
+* SQL
+* GitHub (Version Control)
+* GitHub Actions (CI/CD)
+* Data Engineering Concepts (ETL, Data Modeling)
+
+## Architecture
+```text
+Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold Layer 
+```
+**Medallion Architecture**
+
+The pipeline is designed using a layered architecture to ensure:
+
+- Data traceability : `Bronze` retains raw data
+- Data reliability : `Silver` ensures clean data
+- Performance optimization : `Gold` supports analytics
+
+Each layer has a clear responsibility, reducing complexity and improving maintainability.
+
+<p align="center">
+  <img src="images/MedallionArchitecture.png" width="500" height="600"/>
+</p>
 
 
 ## Dataset Description
@@ -45,30 +77,6 @@ The dataset represents **retail sales transactions**, containing:
 <p align="center">
   <img src="images/schema.png" width="500" height="700"/>
 </p>
-
-
-## Architecture
-```text
-Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold Layer 
-```
-**Medallion Architecture (Bronze → Silver → Gold)**
-
-<p align="center">
-  <img src="images/MedallionArchitecture.png" width="500" height="600"/>
-</p>
-
-
-
-## Technology Stack
-
-* Databricks (PySpark, Delta Lake)
-* Python
-* SQL
-* GitHub (Version Control)
-* GitHub Actions (CI/CD)
-* Data Engineering Concepts (ETL, Data Modeling)
-
-
 
 
 ##  End-to-End Pipeline Flow
@@ -187,7 +195,7 @@ The Gold layer enables:
 
 ## CI/CD Pipeline (Github Actions)
 
-This project implements an automated CI/CD pipeline to ensure seamless deployment.
+Implemented an automated CI/CD pipeline to ensure seamless deployment.
 
 ### Flow
 
@@ -210,6 +218,14 @@ This project implements an automated CI/CD pipeline to ensure seamless deploymen
 - Reduced human error
 - Consistent environment setup
 
+## Getting started 
+
+1. Clone the repository
+2. Configure Databricks credentials as GitHub secrets
+3. Push to main to trigger deployment, or import notebooks manually
+4. Run the workflow job in Databricks
+5. Query the Gold layer tables for analytics
+
 ## Skills Demonstrated
 
 * Data Engineering (ETL Pipeline Design)
@@ -220,18 +236,6 @@ This project implements an automated CI/CD pipeline to ensure seamless deploymen
 * CI/CD Implementation
 * Git & Version Control
 * Problem Solving & Debugging
-
-
-
-## Getting started 
-
-1. Clone the repository
-2. Configure Databricks credentials as GitHub secrets
-3. Push to main to trigger deployment, or import notebooks manually
-4. Run the workflow job in Databricks
-5. Query the Gold layer tables for analytics
-
-
 
 ## Future Enhancements
 
