@@ -1,4 +1,4 @@
-# Sales Data Pipeline using Databricks with CI/CD Integration
+# Sales Data Pipeline using Databricks & CI/CD
 
 ## Project Overview
 
