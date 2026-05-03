@@ -185,11 +185,9 @@ The Gold layer enables:
 
 
 
-## CI/CD Implementation
+## CI/CD Pipeline (Github Actions)
 
-### Trigger : 
-
-* Executes on every push to `main` branch
+This project implements an automated CI/CD pipeline to ensure seamless deployment.
 
 ### Flow
 
@@ -201,12 +199,16 @@ The Gold layer enables:
 6. Pipeline executed after deployment
 
 
-## GitHub Secrets
+### Key Features:
+- Auto-trigger on code push to `main` branch
+- Automated notebook deployment to `Databricks`
+- Job configuration updated dynamically
+- Eliminates manual deployment effort
 
-* `DATABRICKS_HOST`
-* `DATABRICKS_TOKEN`
-
-
+### Benefits:
+- Faster development cycles
+- Reduced human error
+- Consistent environment setup
 
 ## Skills Demonstrated
 
