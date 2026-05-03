@@ -18,8 +18,7 @@ The dataset represents **retail sales transactions**, containing:
 * Sales metrics (Sales, Quantity, Discount, Profit)
 
 ```markdown
-![Bronze Schema](images/bronze_schema.png)
-```
+![Bronze Schema](https://raw.githubusercontent.com/<your-username>/<repo-name>/main/images/bronze_schema.png)```
 
 ## Architecture
 Medallion Layers
