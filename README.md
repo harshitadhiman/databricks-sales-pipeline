@@ -1,47 +1,15 @@
 # Sales Data Pipeline using Databricks & CI/CD
 
-## Project Overview
 
+
+## Project Overview
 This project implements an **end-to-end data engineering pipeline** using Databricks, following the **Medallion Architecture (Bronze → Silver → Gold)**.
 
 This pipeline ingests raw retail sales data, applies transformations and quality checks, and produces analytics-ready datasets—all orchestrated through Databricks Jobs and deployed automatically on every push to main.
 
----
 
-## Dataset Description
-
-The dataset represents **retail sales transactions**, containing:
-
-* Order details (Order ID, Order Date, Ship Date)
-* Customer information (Customer ID, Segment, Region)
-* Product details (Category, Sub-category)
-* Sales metrics (Sales, Quantity, Discount, Profit)
-
-```markdown
-![Bronze Schema](https://raw.githubusercontent.com/<your-username>/<repo-name>/main/images/bronze_schema.png)```
-
-## Architecture
-Medallion Layers
-```markdown
-(images/MedallionArchitecture.png)
-```
-```text
-Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold Layer → Dashboard
-```
-
-## Technology Stack
-
-* Databricks (PySpark, Delta Lake)
-* Python
-* SQL
-* GitHub (Version Control)
-* GitHub Actions (CI/CD)
-* Data Engineering Concepts (ETL, Data Modeling)
-
----
 
 ## Project Structure
-
 ```
 databricks-sales-pipeline/
 │
@@ -61,7 +29,47 @@ databricks-sales-pipeline/
 └── README.md
 ```
 
----
+
+
+
+## Dataset Description
+
+The dataset represents **retail sales transactions**, containing:
+
+* Order details (Order ID, Order Date, Ship Date)
+* Customer information (Customer ID, Segment, Region)
+* Product details (Category, Sub-category)
+* Sales metrics (Sales, Quantity, Discount, Profit)
+
+
+<p align="center">
+  <img src="images/schema.png" width="500" height="700"/>
+</p>
+
+
+## Architecture
+```text
+Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold Layer 
+```
+**Medallion Architecture (Bronze → Silver → Gold)**
+
+<p align="center">
+  <img src="images/MedallionArchitecture.png" width="500" height="600"/>
+</p>
+
+
+
+## Technology Stack
+
+* Databricks (PySpark, Delta Lake)
+* Python
+* SQL
+* GitHub (Version Control)
+* GitHub Actions (CI/CD)
+* Data Engineering Concepts (ETL, Data Modeling)
+
+
+
 
 ##  End-to-End Pipeline Flow
 
@@ -71,7 +79,7 @@ databricks-sales-pipeline/
 * No heavy transformation applied
 * Serves as the source of truth
 
----
+
 
 ### Step 2: Data Transformation (Silver Layer)
 
@@ -82,28 +90,28 @@ databricks-sales-pipeline/
   * `delivery_days`
   * `delivery_type` (1-day, fast, delayed)
 
----
+
 
 ### Step 3: Data Quality Checks
 
 * Validation rules applied on both Bronze and Silver layers
 * Ensures reliability before downstream usage
 
----
+
 
 ### Step 4: Data Modeling
 
 * Creation of Fact and Dimension tables
 * Enables structured analytics
 
----
+
 
 ### Step 5: Gold Layer (Analytics)
 
 * Aggregated tables for reporting
 * Business insights generation
 
----
+
 
 ## Workflow Pipeline (Databricks Jobs)
 
@@ -113,11 +121,10 @@ The pipeline is orchestrated using a **multi-task workflow**:
 Bronze → Silver → Data Quality → Tables → Gold
 ```
 
-```markdown
-![Workflow](images/pipeline.png)
-```
+<p align="center">
+  <img src="images/pipeline.png" width="700" height="600"/>
+</p>
 
----
 
 ## Data Quality Framework
 
@@ -128,11 +135,12 @@ Validation checks run on both Bronze and Silver layers before downstream process
 * Negative values	: Validates Sales, Quantity, Profit
 * Invalid discounts	: Ensures discount values within valid range
 * Delivery calculations	: Validates delivery date logic
----
 
-```markdown
-![Data Quality Dashboard](images/data_quality.png)
-```
+
+<p align="center">
+  <img src="images/data_quality.png" width="500" height="600"/>
+</p>
+
 
 ### Key Observations: 
 
@@ -140,9 +148,8 @@ Validation checks run on both Bronze and Silver layers before downstream process
 * All checks passed in cleaned dataset
 * Data consistency improved after transformations
 
----
 
-## Transformations Applied
+### Transformations Applied
 
 * Removed duplicate records
 * Handled null values
@@ -150,7 +157,7 @@ Validation checks run on both Bronze and Silver layers before downstream process
 * Derived delivery metrics
 * Validated business rules
 
----
+
 
 ## Data Model
 
@@ -165,7 +172,7 @@ Validation checks run on both Bronze and Silver layers before downstream process
 * Geography
 * Date
 
----
+
 
 ## Analytics Capabilities
 
@@ -176,7 +183,7 @@ The Gold layer enables:
 * Regional performance comparisons
 * Delivery efficiency metrics
 
----
+
 
 ## CI/CD Implementation
 
@@ -193,14 +200,13 @@ The Gold layer enables:
 5. Existing job updated
 6. Pipeline executed after deployment
 
----
 
 ## GitHub Secrets
 
 * `DATABRICKS_HOST`
 * `DATABRICKS_TOKEN`
 
----
+
 
 ## Skills Demonstrated
 
@@ -213,7 +219,7 @@ The Gold layer enables:
 * Git & Version Control
 * Problem Solving & Debugging
 
----
+
 
 ## Getting started 
 
@@ -223,7 +229,7 @@ The Gold layer enables:
 4. Run the workflow job in Databricks
 5. Query the Gold layer tables for analytics
 
----
+
 
 ## Future Enhancements
 
@@ -233,5 +239,5 @@ The Gold layer enables:
 * Integration with BI tools (Power BI)
 * Data Visualization with Aggregate Tables*
 
----
+
 
