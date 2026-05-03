@@ -1,16 +1,16 @@
-# 🚀 Sales Data Pipeline using Databricks with CI/CD Integration
+# Sales Data Pipeline using Databricks with CI/CD Integration
 
 ---
 
-## 📌 1. Project Overview
+## Project Overview
 
 This project implements an **end-to-end data engineering pipeline** using Databricks, following the **Medallion Architecture (Bronze → Silver → Gold)**.
 
-The pipeline ingests raw sales data, performs cleaning and transformations, applies data quality validations, and produces analytics-ready datasets. The entire workflow is automated using **CI/CD with GitHub Actions**.
+This pipeline ingests raw retail sales data, applies transformations and quality checks, and produces analytics-ready datasets—all orchestrated through Databricks Jobs and deployed automatically on every push to main.
 
 ---
 
-## 📊 2. Dataset Description
+## Dataset Description
 
 The dataset represents **retail sales transactions**, containing:
 
@@ -19,23 +19,20 @@ The dataset represents **retail sales transactions**, containing:
 * Product details (Category, Sub-category)
 * Sales metrics (Sales, Quantity, Discount, Profit)
 
-### 🧾 Bronze Layer Schema
-
 ```markdown
 ![Bronze Schema](images/bronze_schema.png)
 ```
 
----
-
-## 🏗️ 3. Architecture
-
+## Architecture
+Medallion Layers
+```markdown
+(images/MedallionArchitecture.png)
+```
 ```text
 Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold Layer → Dashboard
 ```
 
----
-
-## ⚙️ 4. Technology Stack
+## Technology Stack
 
 * Databricks (PySpark, Delta Lake)
 * Python
@@ -46,7 +43,7 @@ Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold L
 
 ---
 
-## 📂 5. Project Structure
+## Project Structure
 
 ```
 databricks-sales-pipeline/
@@ -69,7 +66,7 @@ databricks-sales-pipeline/
 
 ---
 
-## 🔄 6. End-to-End Pipeline Flow
+##  End-to-End Pipeline Flow
 
 ### Step 1: Data Ingestion (Bronze Layer)
 
@@ -111,7 +108,7 @@ databricks-sales-pipeline/
 
 ---
 
-## 🔁 7. Workflow Pipeline (Databricks Jobs)
+## Workflow Pipeline (Databricks Jobs)
 
 The pipeline is orchestrated using a **multi-task workflow**:
 
@@ -119,36 +116,28 @@ The pipeline is orchestrated using a **multi-task workflow**:
 Bronze → Silver → Data Quality → Tables → Gold
 ```
 
-### 📌 Workflow Execution
-
 ```markdown
 ![Workflow](images/pipeline.png)
 ```
 
 ---
 
-## 🧪 8. Data Quality Framework
+## Data Quality Framework
 
-A dedicated data quality layer is implemented with **pass/fail logic** on both raw data(bronze_layer) and cleaned data (silver_layer).
+Validation checks run on both Bronze and Silver layers before downstream processing:
 
-### ✔ Checks Performed
-
-* Null checks (Order ID, Customer ID)
-* Duplicate detection
-* Negative values validation
-* Invalid discount values
-* Invalid delivery calculations
-
+* Null validation : Order ID, Customer ID are required
+* Duplicate detection	: Identifies and flags duplicate records
+* Negative values	: Validates Sales, Quantity, Profit
+* Invalid discounts	: Ensures discount values within valid range
+* Delivery calculations	: Validates delivery date logic
 ---
-
-### 📊 Data Quality Dashboard
-
 
 ```markdown
 ![Data Quality Dashboard](images/data_quality.png)
 ```
 
-### 🧠 Key Observations
+### Key Observations: 
 
 * Duplicate records detected in raw data and handled during cleaning
 * All checks passed in cleaned dataset
@@ -156,7 +145,7 @@ A dedicated data quality layer is implemented with **pass/fail logic** on both r
 
 ---
 
-## 🔧 9. Transformations Applied
+## Transformations Applied
 
 * Removed duplicate records
 * Handled null values
@@ -166,7 +155,7 @@ A dedicated data quality layer is implemented with **pass/fail logic** on both r
 
 ---
 
-## 📊 10. Data Model
+## 📊 Data Model
 
 ### Fact Table
 
@@ -181,20 +170,20 @@ A dedicated data quality layer is implemented with **pass/fail logic** on both r
 
 ---
 
-## 📈 11. Analytics & Use Cases
+## Analytics Capabilities
 
-The Gold layer supports:
+The Gold layer enables:
 
-* Sales trend analysis (monthly/yearly)
-* Customer behavior tracking
-* Region-wise performance
-* Delivery performance insights
+* Monthly/yearly sales trends
+* Customer segmentation analysis
+* Regional performance comparisons
+* Delivery efficiency metrics
 
 ---
 
-## ⚡ 12. CI/CD Implementation
+## CI/CD Implementation
 
-### Trigger
+### Trigger : 
 
 * Executes on every push to `main` branch
 
@@ -209,14 +198,14 @@ The Gold layer supports:
 
 ---
 
-## 🔐 13. GitHub Secrets
+## GitHub Secrets
 
 * `DATABRICKS_HOST`
 * `DATABRICKS_TOKEN`
 
 ---
 
-## 🛠️ 14. Skills Demonstrated
+## Skills Demonstrated
 
 * Data Engineering (ETL Pipeline Design)
 * PySpark Transformations
@@ -229,29 +218,23 @@ The Gold layer supports:
 
 ---
 
-## ▶️ 15. How to Run
+## Getting started 
 
 1. Clone the repository
-2. Import notebooks into Databricks (or use CI/CD)
-3. Configure Databricks credentials
-4. Run the workflow job
-5. Validate outputs in Gold layer
+2. Configure Databricks credentials as GitHub secrets
+3. Push to main to trigger deployment, or import notebooks manually
+4. Run the workflow job in Databricks
+5. Query the Gold layer tables for analytics
 
 ---
 
-## 🚀 16. Future Enhancements
+## Future Enhancements
 
 * Incremental loading using MERGE
 * Partitioning optimization
 * Monitoring & logging layer
 * Integration with BI tools (Power BI)
 * Data Visualization with Aggregate Tables*
-
----
-
-## 📌 17. Conclusion
-
-This project demonstrates a **complete real-world data pipeline**, with Data ingestion, transformation, validation, orchestration, and deployment.
 
 ---
 
