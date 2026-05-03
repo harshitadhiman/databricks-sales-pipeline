@@ -1,115 +1,257 @@
+# 🚀 Sales Data Pipeline using Databricks with CI/CD Integration
 
 ---
 
-# 📊 Sales Data Pipeline — Databricks + CI/CD
+## 📌 1. Project Overview
 
-An end-to-end data engineering pipeline implementing the **Medallion Architecture (Bronze → Silver → Gold)** using Databricks. The project includes automated deployment and orchestration through GitHub Actions for a fully CI/CD-enabled workflow.
+This project implements an **end-to-end data engineering pipeline** using Databricks, following the **Medallion Architecture (Bronze → Silver → Gold)**.
 
----
-
-## 🚀 Overview
-
-This project demonstrates how to design and build a scalable data pipeline that:
-
-* Ingests raw data into Delta Lake
-* Transforms and cleans data for analytics
-* Applies data quality checks
-* Produces business-ready aggregated datasets
-* Automates deployment using CI/CD
+The pipeline ingests raw sales data, performs cleaning and transformations, applies data quality validations, and produces analytics-ready datasets. The entire workflow is automated using **CI/CD with GitHub Actions**.
 
 ---
 
-## 🏗️ Architecture
+## 📊 2. Dataset Description
 
+The dataset represents **retail sales transactions**, containing:
+
+* Order details (Order ID, Order Date, Ship Date)
+* Customer information (Customer ID, Segment, Region)
+* Product details (Category, Sub-category)
+* Sales metrics (Sales, Quantity, Discount, Profit)
+
+### 🧾 Bronze Layer Schema
+
+```markdown
+![Bronze Schema](images/bronze_schema.png)
 ```
-Source Data → Bronze → Silver → Data Quality → Gold → Analytics
+
+---
+
+## 🏗️ 3. Architecture
+
+```text
+Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold Layer → Dashboard
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## ⚙️ 4. Technology Stack
 
-* **Databricks** (PySpark, Delta Lake)
-* **Python**
-* **SQL**
-* **GitHub Actions** (CI/CD)
+* Databricks (PySpark, Delta Lake)
+* Python
+* SQL
+* GitHub (Version Control)
+* GitHub Actions (CI/CD)
+* Data Engineering Concepts (ETL, Data Modeling)
 
 ---
 
-## 📁 Project Structure
+## 📂 5. Project Structure
 
 ```
 databricks-sales-pipeline/
+│
 ├── Notebooks/
-│   ├── Ingest Data - Bronze Layer.ipynb
-│   ├── Transformation & Cleaning - Silver Layer.ipynb
+│   ├── Ingest Data - Bronze layer.ipynb
+│   ├── Transformation and cleaning - Silver Layer.ipynb
 │   ├── Data Quality Checks.ipynb
-│   ├── Fact & Dimension Tables.ipynb
-│   └── Aggregations - Gold Layer.ipynb
+│   ├── Tables - fact & dimension.ipynb
+│   └── Aggregate Tables - Gold Layer.ipynb
+│
 ├── job/
 │   └── jobs.json
+│
 ├── .github/workflows/
 │   └── main.yml
+│
 └── README.md
 ```
 
 ---
 
-## 🔄 Pipeline Layers
+## 🔄 6. End-to-End Pipeline Flow
 
-### 🟫 Bronze (Ingestion)
+### Step 1: Data Ingestion (Bronze Layer)
 
-* Raw data ingestion into Delta tables
-* Minimal transformations to preserve source data
-
-### ⚪ Silver (Transformation)
-
-* Null handling and type casting
-* Data cleaning and standardization
-* Feature engineering (`delivery_days`, `delivery_type`)
-
-### ✅ Data Quality
-
-* Null and duplicate checks
-* Business rule validation with pass/fail reporting
-
-### 🟨 Gold (Analytics)
-
-* Aggregated datasets for reporting and insights:
-
-  * Sales trends
-  * Regional performance
-  * Customer segmentation
-  * Delivery efficiency
+* Raw data is loaded into Delta tables
+* No heavy transformation applied
+* Serves as the source of truth
 
 ---
 
-## 📊 Data Model
+### Step 2: Data Transformation (Silver Layer)
 
-| Fact Table                      | Dimension Tables                   |
-| ------------------------------- | ---------------------------------- |
-| Sales (Sales, Quantity, Profit) | Customer, Product, Geography, Date |
+* Data cleaning and preprocessing
+* Schema standardization
+* Derived columns added:
+
+  * `delivery_days`
+  * `delivery_type` (1-day, fast, delayed)
 
 ---
 
-## ⚙️ CI/CD Pipeline
+### Step 3: Data Quality Checks
 
-Automated using GitHub Actions and triggered on every push to `main`.
+* Validation rules applied on both Bronze and Silver layers
+* Ensures reliability before downstream usage
 
-### Workflow Steps:
+---
 
-1. Checkout repository
-2. Install and authenticate Databricks CLI
-3. Deploy notebooks to Databricks workspace
-4. Update job configuration
-5. Trigger pipeline run
+### Step 4: Data Modeling
 
-### 🔐 Required Secrets
+* Creation of Fact and Dimension tables
+* Enables structured analytics
+
+---
+
+### Step 5: Gold Layer (Analytics)
+
+* Aggregated tables for reporting
+* Business insights generation
+
+---
+
+## 🔁 7. Workflow Pipeline (Databricks Jobs)
+
+The pipeline is orchestrated using a **multi-task workflow**:
+
+```
+Bronze → Silver → Data Quality → Tables → Gold
+```
+
+### 📌 Workflow Execution
+
+```markdown
+![Workflow](images/pipeline.png)
+```
+
+---
+
+## 🧪 8. Data Quality Framework
+
+A dedicated data quality layer is implemented with **pass/fail logic** on both raw data(bronze_layer) and cleaned data (silver_layer).
+
+### ✔ Checks Performed
+
+* Null checks (Order ID, Customer ID)
+* Duplicate detection
+* Negative values validation
+* Invalid discount values
+* Invalid delivery calculations
+
+---
+
+### 📊 Data Quality Dashboard
+
+
+```markdown
+![Data Quality Dashboard](images/data_quality.png)
+```
+
+### 🧠 Key Observations
+
+* Duplicate records detected in raw data and handled during cleaning
+* All checks passed in cleaned dataset
+* Data consistency improved after transformations
+
+---
+
+## 🔧 9. Transformations Applied
+
+* Removed duplicate records
+* Handled null values
+* Standardized date formats
+* Derived delivery metrics
+* Validated business rules
+
+---
+
+## 📊 10. Data Model
+
+### Fact Table
+
+* Sales metrics: Sales, Quantity, Profit
+
+### Dimension Tables
+
+* Customer
+* Product
+* Geography
+* Date
+
+---
+
+## 📈 11. Analytics & Use Cases
+
+The Gold layer supports:
+
+* Sales trend analysis (monthly/yearly)
+* Customer behavior tracking
+* Region-wise performance
+* Delivery performance insights
+
+---
+
+## ⚡ 12. CI/CD Implementation
+
+### Trigger
+
+* Executes on every push to `main` branch
+
+### Flow
+
+1. Code pushed to GitHub
+2. CI/CD pipeline triggered
+3. Databricks CLI configured using secrets
+4. Notebooks deployed to workspace
+5. Existing job updated
+6. Pipeline executed after deployment
+
+---
+
+## 🔐 13. GitHub Secrets
 
 * `DATABRICKS_HOST`
 * `DATABRICKS_TOKEN`
 
 ---
 
+## 🛠️ 14. Skills Demonstrated
 
+* Data Engineering (ETL Pipeline Design)
+* PySpark Transformations
+* Data Modeling (Fact & Dimension Tables)
+* Data Quality Validation
+* Workflow Orchestration
+* CI/CD Implementation
+* Git & Version Control
+* Problem Solving & Debugging
+
+---
+
+## ▶️ 15. How to Run
+
+1. Clone the repository
+2. Import notebooks into Databricks (or use CI/CD)
+3. Configure Databricks credentials
+4. Run the workflow job
+5. Validate outputs in Gold layer
+
+---
+
+## 🚀 16. Future Enhancements
+
+* Incremental loading using MERGE
+* Partitioning optimization
+* Monitoring & logging layer
+* Integration with BI tools (Power BI)
+* Data Visualization with Aggregate Tables*
+
+---
+
+## 📌 17. Conclusion
+
+This project demonstrates a **complete real-world data pipeline**, with Data ingestion, transformation, validation, orchestration, and deployment.
+
+---
 
