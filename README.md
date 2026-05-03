@@ -2,7 +2,7 @@
 
 
 
-## Project Overview
+##  Overview
 An **end-to-end data engineering pipeline** using Databricks, following the **Medallion Architecture**.
 The pipeline ingests raw retail sales data, applies transformations and quality checks, and produces analytics-ready datasets—all orchestrated through Databricks Jobs and deployed automatically on every push to main.
 
@@ -45,7 +45,6 @@ databricks-sales-pipeline/
 ```
 
 
-
 ## Architecture
 ```text
 Source Data → Bronze Layer → Silver Layer → Data Quality Checks → Gold Layer 
@@ -65,7 +64,7 @@ Each layer has a clear responsibility, reducing complexity and improving maintai
 </p>
 
 
-## Dataset Description
+## Dataset 
 
 The dataset represents **retail sales transactions**, containing:
 
@@ -80,7 +79,7 @@ The dataset represents **retail sales transactions**, containing:
 </p>
 
 
-##  End-to-End Pipeline Flow
+##  Pipeline Flow
 
 ### Step 1: Data Ingestion (Bronze Layer)
 
@@ -115,25 +114,33 @@ The dataset represents **retail sales transactions**, containing:
 
 
 
-### Step 5: Gold Layer (Analytics)
+### Step 5: Analytics (Gold Layer)
 
 * Aggregated tables for reporting
 * Business insights generation
 
 
 
-## Workflow Pipeline (Databricks Jobs)
+## Workflow Orchestration (Databricks Jobs)
 
-The pipeline is orchestrated using a **multi-task workflow**:
+The pipeline is orchestrated using Databricks Jobs, implementing a `Directed Acyclic Graph (DAG)` to manage task dependencies and execution flow.
 
+Pipeline Flow
 ```
-Bronze → Silver → Data Quality → Tables → Gold
+Bronze → Silver → (Data Quality, Tables, Gold)
 ```
-
 <p align="center">
   <img src="images/pipeline.png" width="700" height="600"/>
 </p>
 
+### Pipeline Features
+* Each task runs as an independent notebook ensures modularity and scalability
+* Tasks execute in a dependency-driven sequence
+
+  if a task fails downstream tasks are skipped, which prevents propagation of incorrect data
+* Parallel execution is enabled after Silver layer for faster execution
+
+* Visual DAG view in Databricks is available along with Task-level logs and execution status for monitoring.
 
 ## Data Quality Framework
 
